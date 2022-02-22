@@ -27,11 +27,13 @@ async function main() {
     const client = new http.HttpClient();
     const startTime = new Date().getTime();
 
+    core.info(`Waiting up to ${timeout} seconds for ${url} to return a ${expectedStatus} HTTP response`);
     while (new Date().getTime() - startTime < timeout) {
       try {
         const response = await client.request(method, url, null, {});
         const status = response.message.statusCode;
 
+        core.info(`Got ${status} response`);
         if (status === expectedStatus) {
           return;
         } else {

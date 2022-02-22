@@ -1566,10 +1566,12 @@ function main() {
             }
             const client = new _actions_http_client__WEBPACK_IMPORTED_MODULE_1__/* .HttpClient */ .eN();
             const startTime = new Date().getTime();
+            _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Waiting up to ${timeout} seconds for ${url} to return a ${expectedStatus} HTTP response`);
             while (new Date().getTime() - startTime < timeout) {
                 try {
                     const response = yield client.request(method, url, null, {});
                     const status = response.message.statusCode;
+                    _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Got ${status} response`);
                     if (status === expectedStatus) {
                         return;
                     }
